@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
   <head>
     <meta charset="utf-8">
     <title>Weekend Ticket Assignment</title>
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="assets/scripts/client.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
   </head>
-  <body>
-    Page loaded!
+  <body ng-controller = "MainController as main">
+    <div class="well">
+      Name: <input type="text" ng-model="main.ticket.name" /><br />
+      Type: <input type="text" ng-model="main.ticket.type" /><br />
+      Priority: <input type="text" ng-model="main.ticket.priority" /><br />
+      Description: <input type="text" ng-model="main.ticket.description" /><br />
+      Assignee: <input type="text" ng-model="main.ticket.assignee" /><br />
+      Reporter: <input type="text" ng-model="main.ticket.reporter" /><br />
+      <button class="btn" ng-click="main.addTicket(main.ticket)">Add Ticket</button>
+    </div>
+    <div ng-repeat="ticket in main.tickets" class="well col-md-4">
+        Name: {{ ticket.name }}<br />
+        Type: {{ ticket.type }}<br />
+        Priority: {{ ticket.priority }}<br />
+        Description: {{ ticket.description }}<br />
+        Assignee: {{ ticket.assignee }}<br />
+        Reporter: {{ ticket.reporter }}<br />
+        Created: {{ ticket.created }}<br />
+        Updated: {{ ticket.updated }}<br />
+        <button class="btn" ng-click="main.deleteTicket(ticket, $index)">Completed</button>
+    </div>
   </body>
 </html>
