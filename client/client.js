@@ -23,8 +23,8 @@ app.controller('MainController', ['$http', function($http){
     $http.delete('/ticket/' + id).then(getTickets());
   };
 
-  vm.editTicket = function(ticket, index){
-    vm.showEdit = true;
+  vm.editTicket = function(ticket){
+    ticket.showEdit = true;
   };
 
   vm.saveTicket = function(ticket, index){

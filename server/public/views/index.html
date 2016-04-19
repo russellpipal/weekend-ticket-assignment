@@ -20,7 +20,7 @@
       <button class="btn btn-primary" ng-click="main.addTicket(main.ticket)">Add Ticket</button>
     </div>
     <div ng-repeat="ticket in main.tickets" class="well col-md-4 ticketWell">
-      <div ng-hide="main.showEdit">
+      <div ng-hide="ticket.showEdit">
         Name: {{ ticket.name }}<br />
         Type: {{ ticket.type }}<br />
         Priority: {{ ticket.priority }}<br />
@@ -30,9 +30,9 @@
         Created: {{ ticket.created }}<br />
         Updated: {{ ticket.updated }}<br />
         <button class="btn btn-danger" ng-click="main.deleteTicket(ticket, $index)">Completed</button>
-        <button class="btn" ng-click="main.editTicket(ticket, $index)">Edit Ticket</button>
+        <button class="btn" ng-click="main.editTicket(ticket)">Edit Ticket</button>
       </div>
-      <div ng-show="main.showEdit">
+      <div ng-show="ticket.showEdit">
         Name: <input type="text" ng-model="ticket.name" /><br />
         Type: <input type="text" ng-model="ticket.type" /><br />
         Priority: <input type="text" ng-model="ticket.priority" /><br />
