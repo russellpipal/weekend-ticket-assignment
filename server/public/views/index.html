@@ -7,6 +7,7 @@
     <script src="assets/scripts/client.min.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/styles/styles.css" rel="stylesheet" />
   </head>
   <body ng-controller = "MainController as main">
     <div class="well">
@@ -16,9 +17,10 @@
       Description: <input type="text" ng-model="main.ticket.description" /><br />
       Assignee: <input type="text" ng-model="main.ticket.assignee" /><br />
       Reporter: <input type="text" ng-model="main.ticket.reporter" /><br />
-      <button class="btn" ng-click="main.addTicket(main.ticket)">Add Ticket</button>
+      <button class="btn btn-primary" ng-click="main.addTicket(main.ticket)">Add Ticket</button>
     </div>
-    <div ng-repeat="ticket in main.tickets" class="well col-md-4">
+    <div ng-repeat="ticket in main.tickets" class="well col-md-4 ticketWell">
+      <div ng-hide="main.showEdit">
         Name: {{ ticket.name }}<br />
         Type: {{ ticket.type }}<br />
         Priority: {{ ticket.priority }}<br />
@@ -27,7 +29,19 @@
         Reporter: {{ ticket.reporter }}<br />
         Created: {{ ticket.created }}<br />
         Updated: {{ ticket.updated }}<br />
-        <button class="btn" ng-click="main.deleteTicket(ticket, $index)">Completed</button>
+        <button class="btn btn-danger" ng-click="main.deleteTicket(ticket, $index)">Completed</button>
+        <button class="btn" ng-click="main.editTicket(ticket, $index)">Edit Ticket</button>
+      </div>
+      <div ng-show="main.showEdit">
+        Name: <input type="text" ng-model="ticket.name" /><br />
+        Type: <input type="text" ng-model="ticket.type" /><br />
+        Priority: <input type="text" ng-model="ticket.priority" /><br />
+        Description: <input type="text" ng-model="ticket.description" /><br />
+        Assignee: <input type="text" ng-model="ticket.assignee" /><br />
+        Reporter: <input type="text" ng-model="ticket.reporter" /><br />
+        <button class="btn btn-success" ng-click="main.saveTicket(ticket, $index)">Save</button>
+        <button class="btn btn-warning" ng-click="main.cancelEdit()">Cancel</button>
+      </div>
     </div>
   </body>
 </html>

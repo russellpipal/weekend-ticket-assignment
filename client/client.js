@@ -1,9 +1,8 @@
 var app = angular.module('myApp', []);
 
-console.log('client opened');
-
 app.controller('MainController', ['$http', function($http){
   var vm = this;
+  vm.showEdit = false;
 
   var getTickets = function(){
     $http.get('/ticket').then(function(response){
@@ -24,5 +23,19 @@ app.controller('MainController', ['$http', function($http){
     $http.delete('/ticket/' + id).then(getTickets());
   };
 
+  vm.editTicket = function(ticket, index){
+    vm.showEdit = true;
+  };
+
+  vm.saveTicket = function(ticket, index){
+    $http.put('/ticket/saveTicket', ticket).then(getTickets());
+    vm.showEdit = false;
+  };
+
+  vm.cancelEdit = function(){
+    vm.showEdit = false;
+    getTickets();
+  };
+//Run once on program launch
   getTickets();
 }]);
